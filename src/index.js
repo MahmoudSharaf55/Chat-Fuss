@@ -10,7 +10,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 const publicDirectoryPath = path.join(__dirname, '../public');
 app.use(express.static(publicDirectoryPath));
 
@@ -60,6 +60,6 @@ io.on('connection', (socket) => {
     })
 });
 
-server.listen(PORT, () => {
-    console.log('Running on port ' + PORT);
+server.listen(port, () => {
+    console.log('Running on port ' + port);
 });
