@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$" libraries="{chat-app/node_modules}" />
+    <file url="file://$PROJECT_DIR$/node_modules/bad-words/lib/badwords.js" libraries="{chat-app/node_modules}" />
+    <file url="file://$PROJECT_DIR$/node_modules/bad-words/test/addWords.js" libraries="{chat-app/node_modules}" />
+    <file url="file://$PROJECT_DIR$/node_modules/bad-words/test/filter.js" libraries="{chat-app/node_modules}" />
+    <file url="file://$PROJECT_DIR$/node_modules/bad-words/test/isProfane.js" libraries="{chat-app/node_modules}" />
+    <file url="file://$PROJECT_DIR$/node_modules/bad-words/test/removeWords.js" libraries="{chat-app/node_modules}" />
+    <file url="file://$PROJECT_DIR$/node_modules/bad-words/test/replaceWord.js" libraries="{chat-app/node_modules}" />
+    <file url="file://$PROJECT_DIR$/node_modules/socket.io/lib/client.js" libraries="{chat-app/node_modules}" />
+    <file url="file://$PROJECT_DIR$/node_modules/socket.io/lib/index.js" libraries="{chat-app/node_modules}" />
+    <file url="file://$PROJECT_DIR$/node_modules/socket.io/lib/namespace.js" libraries="{chat-app/node_modules}" />
+    <file url="file://$PROJECT_DIR$/node_modules/socket.io/lib/parent-namespace.js" libraries="{chat-app/node_modules}" />
+    <file url="file://$PROJECT_DIR$/node_modules/socket.io/lib/socket.js" libraries="{chat-app/node_modules}" />
+    <file url="PROJECT" libraries="{moment, mustache, qs}" />
+    <includedPredefinedLibrary name="Node.js Core" />
+  </component>
+</project>
