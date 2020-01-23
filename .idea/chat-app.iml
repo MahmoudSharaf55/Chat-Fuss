@@ -12,5 +12,6 @@
     <orderEntry type="library" name="moment" level="application" />
     <orderEntry type="library" name="qs" level="application" />
     <orderEntry type="library" name="jquery" level="application" />
+    <orderEntry type="library" name="recorder" level="application" />
   </component>
 </module>

@@ -10,6 +10,8 @@ const location_template_left = document.querySelector('#location_template').inne
 const location_template_right = document.querySelector('#location_template_right').innerHTML;
 const img_template_left = document.querySelector('#img_template').innerHTML;
 const img_template_right = document.querySelector('#img_template_right').innerHTML;
+const audio_template_left = document.querySelector('#audio_template').innerHTML;
+const audio_template_right = document.querySelector('#audio_template_right').innerHTML;
 const sidebar_template = document.querySelector('#sidebar_template').innerHTML;
 const {username, room} = Qs.parse(location.search, {ignoreQueryPrefix: true});
 
@@ -40,7 +42,6 @@ socket.on('msg', (message) => {
     autoScroll();
 });
 socket.on('locationMessage', (loc) => {
-    console.log(loc.url);
     let html;
     if (loc.username.trim().toLowerCase() === username.trim().toLowerCase()) {
         html = Mustache.render(location_template_right, {
@@ -48,7 +49,7 @@ socket.on('locationMessage', (loc) => {
             url: loc.url,
             time: moment(loc.time).format('hh:mm a'),
         });
-    }else {
+    } else {
         html = Mustache.render(location_template_left, {
             username: loc.username,
             url: loc.url,
@@ -67,10 +68,29 @@ socket.on('imgMessage', (message) => {
             buffer: message.buffer,
             time: moment(message.time).format('hh:mm a'),
         });
-    }else {
+    } else {
         html = Mustache.render(img_template_left, {
             username: message.username,
             buffer: message.buffer,
+            time: moment(message.time).format('hh:mm a'),
+        });
+    }
+    messages.insertAdjacentHTML('beforeend', html);
+    autoScroll();
+});
+socket.on('audioMessage', (message) => {
+    console.log(message);
+    let html;
+    if (message.username.trim().toLowerCase() === username.trim().toLowerCase()) {
+        html = Mustache.render(audio_template_right, {
+            username: message.username,
+            blob: message.blob,
+            time: moment(message.time).format('hh:mm a'),
+        });
+    } else {
+        html = Mustache.render(audio_template_left, {
+            username: message.username,
+            blob: message.blob,
             time: moment(message.time).format('hh:mm a'),
         });
     }
@@ -121,17 +141,53 @@ socket.emit('join', {username, room: room.toString()}, (error) => {
     }
 });
 const img_input = document.querySelector('#img_input');
-function browseImage(){
+
+function browseImage() {
     $('#img_input').trigger('click');
     return false;
 }
+
 img_input.onchange = e => {
     if (img_input.files && img_input.files[0]) {
         let reader = new FileReader();
         reader.readAsDataURL(img_input.files[0]);
         reader.onload = function (e) {
-            console.log(reader.result);
-            socket.emit('sendImg',reader.result);
+            socket.emit('sendImg', reader.result);
         };
     }
 };
+
+var recorder;
+function startRec() {
+    navigator.mediaDevices.getUserMedia(
+        {
+            audio: true,
+        }).then(stream => {
+        const audio_context = new AudioContext();
+        var input = audio_context.createMediaStreamSource(stream);
+        recorder = new Recorder(input);
+        recorder.record();
+    });
+}
+
+function stopRec() {
+    recorder.stop();
+    recorder.exportWAV(function (blob) {
+        let reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onload = function (e) {
+            socket.emit('sendAudio', reader.result);
+        };
+    });
+}
+function record() {
+    if ($('#recordBtn').hasClass('rec_active')){
+        console.log('stop record');
+        $('#recordBtn').toggleClass('rec_active');
+        stopRec();
+    }else {
+        console.log('start record');
+        $('#recordBtn').toggleClass('rec_active');
+        startRec();
+    }
+}

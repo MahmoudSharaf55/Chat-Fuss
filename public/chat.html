@@ -25,6 +25,7 @@
             </form>
             <button id="locationBtn" onclick="sendLocation()" class="btn"><i class="fa fa-map-marker-alt"></i></button>
             <button id="browseImageBtn" onclick="browseImage()" class="btn"><i class="fa fa-file-image"></i></button>
+            <button id="recordBtn" onclick="record()" class="btn"><i class="fa fa-microphone-alt"></i></button>
             <input type="file" id="img_input" style="display: none" accept="image/*">
         </div>
     </div>
@@ -107,6 +108,28 @@
         </div>
     </div>
 </script>
+<script type="text/html" id="audio_template">
+    <div class="message">
+        <div class="title">
+            <p><span class="message__name">{{username}}</span></p>
+        </div>
+        <audio controls preload="none" src="{{blob}}"></audio>
+        <div class="title">
+            <p><span class="message__meta">{{time}}</span></p>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="audio_template_right">
+    <div class="message direction-rtl">
+        <div class="title">
+            <p><span class="message__name">{{username}}</span></p>
+        </div>
+        <audio controls preload="none" src="{{blob}}"></audio>
+        <div class="title">
+            <p class="direction-ltr"><span class="message__meta">{{time}}</span></p>
+        </div>
+    </div>
+</script>
 <script type="text/html" id="sidebar_template">
     <h2 class="room-title">Room: {{room}}</h2>
     <h3 class="list-title">No. Users: {{users.length}}</h3>
@@ -120,6 +143,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.1/qs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/recorderjs/0.1.0/recorder.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="js/chat.js"></script>
 </body>

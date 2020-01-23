@@ -18,9 +18,17 @@ const generateImage = (username,buffer)=>{
         buffer: buffer,
         time: new Date().getTime(),
     }
-}
+};
+const generateAudio = (username,blob)=>{
+    return {
+        username,
+        blob: blob,
+        time: new Date().getTime(),
+    }
+};
 module.exports = {
     generateMessage,
     generateLocation,
-    generateImage
+    generateImage,
+    generateAudio
 };

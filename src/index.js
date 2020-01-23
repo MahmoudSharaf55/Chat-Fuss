@@ -3,7 +3,7 @@ const path = require('path');
 const socketio = require('socket.io');
 const http = require('http');
 const Filter = require('bad-words');
-const {generateMessage, generateLocation,generateImage} = require('./utils/messages');
+const {generateMessage, generateLocation,generateImage,generateAudio} = require('./utils/messages');
 const {addUser, removeUser, getUser, getUserInRoom} = require('./utils/users');
 
 const app = express();
@@ -62,19 +62,12 @@ io.on('connection', (socket) => {
         const user = getUser(socket.id);
         io.to(user.room).emit('imgMessage', generateImage(user.username,buffer));
     })
+    socket.on('sendAudio', (blob) => {
+        const user = getUser(socket.id);
+        io.to(user.room).emit('audioMessage', generateAudio(user.username,blob));
+    })
 });
 
 server.listen(port, () => {
     console.log('Running on port ' + port);
 });
-
-/*
-router.post('/users/me/avatar', auth, upload.single('uploadImg'), async (req, res) => {   //middleware: uploadImg for param in form data request
-    const buffer = await sharp(req.file.buffer).resize({width: 250,height: 250}).png().toBuffer();
-    req.user.avatar = buffer;
-    await req.user.save();
-    res.send('stored successfully')
-}, (error, req, res, next) => {
-    res.status(400).send({error: error.message})        // error given by cb function in file filter
-});
- */
