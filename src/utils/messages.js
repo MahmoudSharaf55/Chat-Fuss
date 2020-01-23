@@ -12,7 +12,15 @@ const generateLocation = (username,url)=>{
         time: new Date().getTime(),
     }
 };
+const generateImage = (username,buffer)=>{
+    return {
+        username,
+        buffer: buffer,
+        time: new Date().getTime(),
+    }
+}
 module.exports = {
     generateMessage,
-    generateLocation
+    generateLocation,
+    generateImage
 };

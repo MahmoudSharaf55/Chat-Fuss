@@ -22,6 +22,10 @@ body {
 a{
     text-decoration: none;
 }
+button{
+    outline: none;
+    user-select: none;
+}
 label {
     display: block;
     font-size: 14px;
@@ -66,13 +70,12 @@ input {
 .compose form {
     display: flex;
     flex-grow: 1;
-    margin-right: 16px;
 }
 
 .compose input {
     width: 100%;
     padding: 12px;
-    margin: 0 10px;
+    margin: 0 0 0 10px;
     flex-grow: 1;
 }
 
@@ -187,6 +190,7 @@ hr{
     background: #7C5CBF;
     border: none;
     color: white;
+    margin: 0 3px;
 }
 .btn i{
     font-size: 18px;

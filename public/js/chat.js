@@ -8,6 +8,8 @@ const message_template_left = document.querySelector('#message_template').innerH
 const message_template_right = document.querySelector('#message_template_right').innerHTML;
 const location_template_left = document.querySelector('#location_template').innerHTML;
 const location_template_right = document.querySelector('#location_template_right').innerHTML;
+const img_template_left = document.querySelector('#img_template').innerHTML;
+const img_template_right = document.querySelector('#img_template_right').innerHTML;
 const sidebar_template = document.querySelector('#sidebar_template').innerHTML;
 const {username, room} = Qs.parse(location.search, {ignoreQueryPrefix: true});
 
@@ -56,6 +58,25 @@ socket.on('locationMessage', (loc) => {
     messages.insertAdjacentHTML('beforeend', html);
     autoScroll();
 });
+socket.on('imgMessage', (message) => {
+    console.log(message);
+    let html;
+    if (message.username.trim().toLowerCase() === username.trim().toLowerCase()) {
+        html = Mustache.render(img_template_right, {
+            username: message.username,
+            buffer: message.buffer,
+            time: moment(message.time).format('hh:mm a'),
+        });
+    }else {
+        html = Mustache.render(img_template_left, {
+            username: message.username,
+            buffer: message.buffer,
+            time: moment(message.time).format('hh:mm a'),
+        });
+    }
+    messages.insertAdjacentHTML('beforeend', html);
+    autoScroll();
+});
 socket.on('roomData', ({room, users}) => {
     const html = Mustache.render(sidebar_template, {
         room,
@@ -99,3 +120,18 @@ socket.emit('join', {username, room: room.toString()}, (error) => {
         location.href = '/';
     }
 });
+const img_input = document.querySelector('#img_input');
+function browseImage(){
+    $('#img_input').trigger('click');
+    return false;
+}
+img_input.onchange = e => {
+    if (img_input.files && img_input.files[0]) {
+        let reader = new FileReader();
+        reader.readAsDataURL(img_input.files[0]);
+        reader.onload = function (e) {
+            console.log(reader.result);
+            socket.emit('sendImg',reader.result);
+        };
+    }
+};

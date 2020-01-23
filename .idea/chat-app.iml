@@ -11,5 +11,6 @@
     <orderEntry type="library" name="mustache" level="application" />
     <orderEntry type="library" name="moment" level="application" />
     <orderEntry type="library" name="qs" level="application" />
+    <orderEntry type="library" name="jquery" level="application" />
   </component>
 </module>

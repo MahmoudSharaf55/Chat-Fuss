@@ -13,7 +13,7 @@
     <file url="file://$PROJECT_DIR$/node_modules/socket.io/lib/namespace.js" libraries="{chat-app/node_modules}" />
     <file url="file://$PROJECT_DIR$/node_modules/socket.io/lib/parent-namespace.js" libraries="{chat-app/node_modules}" />
     <file url="file://$PROJECT_DIR$/node_modules/socket.io/lib/socket.js" libraries="{chat-app/node_modules}" />
-    <file url="PROJECT" libraries="{moment, mustache, qs}" />
+    <file url="PROJECT" libraries="{jquery, moment, mustache, qs}" />
     <includedPredefinedLibrary name="Node.js Core" />
   </component>
 </project>
