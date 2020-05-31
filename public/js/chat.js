@@ -1,4 +1,4 @@
-const socket = io()
+const socket = io();
 
 const form = document.querySelector('#msg_form');
 const input = document.querySelector('#msg');

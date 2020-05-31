@@ -32,8 +32,8 @@ io.on('connection', (socket) => {
             room: user.room,
             users: getUserInRoom(user.room),
         });
-        callback()
-    })
+        callback();
+    });
     socket.on('sendMsg', (msg, callback) => {
         const filter = new Filter();
         if (filter.isProfane(msg)) {
@@ -66,6 +66,9 @@ io.on('connection', (socket) => {
         const user = getUser(socket.id);
         io.to(user.room).emit('audioMessage', generateAudio(user.username,blob));
     })
+});
+app.get('/info',(req,res)=>{
+    res.send('by: Mahmoud Sharaf');
 });
 
 server.listen(port, () => {
