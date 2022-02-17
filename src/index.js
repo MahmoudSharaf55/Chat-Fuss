@@ -68,6 +68,9 @@ io.on('connection', (socket) => {
 app.get('/info',(req,res)=>{
     res.send('by: Mahmoud Sharaf');
 });
+app.get('/',(req,res)=>{
+    res.render('index.html');
+});
 
 server.listen(port, () => {
     console.log('Running on port ' + port);
