@@ -134,12 +134,16 @@ function sendLocation() {
     })
 }
 
-socket.emit('join', {username, room: room.toString()}, (error) => {
-    if (error) {
-        alert(error);
-        location.href = '/';
-    }
-});
+if (username && room) {
+    socket.emit('join', {username, room: room.toString()}, (error) => {
+        if (error) {
+            alert(error);
+            location.href = '/';
+        }
+    });
+} else {
+    window.location = 'index.html';
+}
 const img_input = document.querySelector('#img_input');
 
 function browseImage() {
@@ -158,6 +162,7 @@ img_input.onchange = e => {
 };
 
 var recorder;
+
 function startRec() {
     navigator.mediaDevices.getUserMedia(
         {
@@ -180,12 +185,13 @@ function stopRec() {
         };
     });
 }
+
 function record() {
-    if ($('#recordBtn').hasClass('rec_active')){
+    if ($('#recordBtn').hasClass('rec_active')) {
         console.log('stop record');
         $('#recordBtn').toggleClass('rec_active');
         stopRec();
-    }else {
+    } else {
         console.log('start record');
         $('#recordBtn').toggleClass('rec_active');
         startRec();

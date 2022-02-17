@@ -236,3 +236,9 @@ audio{
     color: #1D1F26;
     transition: all 0.4s ease;
 }
+
+.bubble-right.img-bubble,
+.bubble-left.img-bubble {
+    padding: 0;
+    overflow: hidden;
+}

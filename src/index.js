@@ -16,18 +16,16 @@ app.use(express.static(publicDirectoryPath));
 
 io.on('connection', (socket) => {
     socket.on('join', (options, callback) => {
-        // socket.emit , io.emit , socket.broadcast.emit for sending to clients without room
-        // io.to.emit , socket.broadcast.to.emit for sending to clients of specific room
         const {error, user} = addUser({
             id: socket.id,
             ...options,
         });
-        if (error) {
+        if (error || !user) {
             return callback(error);
         }
         socket.join(user.room);
         socket.emit('msg', generateMessage(user.username,'Welcome'));
-        socket.broadcast.to(user.room).emit('msg', generateMessage(user.username,`${user.username} has joined`));     // all user except current
+        socket.broadcast.to(user.room).emit('msg', generateMessage(user.username,`${user.username} has joined`));
         io.to(user.room).emit('roomData',{
             room: user.room,
             users: getUserInRoom(user.room),
