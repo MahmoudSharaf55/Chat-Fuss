@@ -54,4 +54,4 @@
 
 Code and documentation copyright 2020 the authors.
 
-Thanks
+Thanks ❤️
