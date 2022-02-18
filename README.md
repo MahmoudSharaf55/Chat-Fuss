@@ -24,14 +24,14 @@
   </p>
 </p>
 
-## Screenshots
+## 📱 Screenshots
 <img src="screenshots/screen1.png" alt="">
     <br>
 <img src="screenshots/screen2.gif" alt="">
 
-## Features
+## ✨ Features
 
-|                      Features                      |
+|             **Features**           |
 | :---------------------------------------------------- |
 | No limit of users on room |
 | No Registrations | 
@@ -41,17 +41,19 @@
 | Share Location |
 | Awesome user interface |
 
-## Development Environment
+## 🛠️ Technologies
 
-* Developed using Node.js
-* Node.js 12.9.0
+* Developed using Node.js 12.9.0
+* Socket.io
 
-## Creator
+## 🚩 License
+
+Open-source License.
+
+## 💻 Authors
 
 [**Ma7MOoOD SHaRaF**](https://github.com/MahmoudSharaf55)
 
-## Copyright and license
+<br>
 
-Code and documentation copyright 2020 the authors.
-
-Thanks ❤️
+> **Thanks ❤️**
